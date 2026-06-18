@@ -1,0 +1,295 @@
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arpita Portfolio</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{
+background:#0f172a;
+color:white;
+overflow-x:hidden;
+}
+#particles{
+position:fixed;inset:0;
+background:
+radial-gradient(circle at 20% 20%,rgba(168,85,247,.25),transparent 30%),
+radial-gradient(circle at 80% 80%,rgba(236,72,153,.25),transparent 30%);
+z-index:-1;
+animation:bg 8s infinite alternate;
+}
+@keyframes bg{
+from{transform:scale(1)}
+to{transform:scale(1.1)}
+}
+.hero{
+min-height:100vh;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+text-align:center;
+padding:20px;
+}
+.hero img{
+width:420px;height:420px;
+border-radius:50%;
+object-fit:cover;
+border:6px solid white;
+box-shadow:0 0 40px #a855f7;
+animation:float 3s ease-in-out infinite;
+}
+@keyframes float{
+50%{transform:translateY(-15px)}
+}
+.hero h1{font-size:55px;margin-top:25px}
+.hero p{font-size:24px;color:#d1d5db;margin-top:10px}
+button{
+margin-top:30px;
+padding:16px 40px;
+border:none;
+border-radius:40px;
+background:linear-gradient(90deg,#8b5cf6,#ec4899);
+color:white;
+font-size:18px;
+cursor:pointer;
+}
+#portfolio{display:none;padding:30px;max-width:1100px;margin:auto}
+.card{
+background:rgba(255,255,255,.08);
+padding:25px;
+margin-bottom:25px;
+border-radius:25px;
+backdrop-filter:blur(10px);
+animation:fade .8s ease;
+}
+@keyframes fade{
+from{opacity:0;transform:translateY(30px)}
+to{opacity:1;transform:translateY(0)}
+}
+.tag{
+display:inline-block;
+padding:10px 18px;
+margin:8px;
+background:#1e293b;
+border:1px solid #8b5cf6;
+border-radius:25px;
+}
+.progress{
+height:12px;background:#222;border-radius:20px;margin:8px 0 20px;
+}
+.bar{
+height:100%;border-radius:20px;
+background:linear-gradient(90deg,#8b5cf6,#ec4899);
+}
+.social p{margin:8px 0}
+.footer{text-align:center;padding:30px;color:#ccc}
+@media(max-width:700px){
+.hero img{width:240px;height:240px}
+.hero h1{font-size:40px}
+.hero p{font-size:20px}
+}
+
+.dark-toggle,.music-btn{position:fixed;top:10px;z-index:1000;padding:8px 12px;font-size:14px}.dark-toggle{right:70px}.music-btn{right:15px;top:10px}
+.project-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:15px}
+.project-card img{width:100%;height:140px;object-fit:cover;border-radius:15px}
+.counter{font-size:32px;font-weight:bold}
+.gallery{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px}
+.gallery img{width:100%;border-radius:15px}
+.shooting-star{position:fixed;width:2px;height:2px;background:#fff;box-shadow:0 0 10px #fff;animation:shoot 5s linear infinite}
+@keyframes shoot{from{transform:translate(-10vw,-10vh)}to{transform:translate(110vw,110vh)}}
+.light-mode{background:#f5f5f5;color:#111}
+.light-mode .card{background:rgba(0,0,0,.05)}
+.cursor-glow{position:fixed;width:15px;height:15px;border-radius:50%;background:rgba(255,255,255,.6);pointer-events:none}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+<div id="particles"></div>
+<button class="dark-toggle" onclick="document.body.classList.toggle('light-mode')">🌙/☀️</button>
+<button class="music-btn" onclick="toggleMusic()">🎵</button>
+<audio id="bgMusic" autoplay loop>
+<source src="music.mp3.ogg" type="audio/ogg">
+</audio>
+<div id="welcome" style="position:fixed;inset:0;background:#000c;display:flex;justify-content:center;align-items:center;z-index:9999;">
+<div style="background:white;color:black;padding:25px;border-radius:20px;text-align:center">
+<h2>✨ Welcome to Arpita's Portfolio ✨</h2><p style="margin:12px 0">Creative • Professional • Interactive</p>
+<button onclick="document.getElementById('welcome').style.display='none'">Enter</button>
+</div></div>
+<div id="loader" style="position:fixed;inset:0;background:#0f172a;color:white;display:flex;justify-content:center;align-items:center;z-index:9998">Loading...</div>
+<div class="shooting-star" style="top:10%;left:20%"></div>
+<div class="shooting-star" style="top:40%;left:60%;animation-delay:2s"></div>
+<div class="cursor-glow" id="glow"></div>
+
+
+<section class="hero" id="home">
+<img src="arpita.jpeg" alt="Arpita">
+<h1>Hi, I'm Arpita 👋</h1>
+<p id="typing"></p>
+<button onclick="openPortfolio()">Explore Portfolio</button>
+</section>
+
+<div id="portfolio">
+
+<div class="card">
+<h2>About Me</h2>
+<p>Hello! I'm Arpita Ghosh, a passionate learner and aspiring web developer. I enjoy creating beautiful websites, learning new technologies and exploring creative ideas.</p>
+</div>
+
+<div class="card">
+<h2>Personal Information</h2>
+<p>📞 8167739389</p>
+<p>📧 ag483052@gmail.com</p>
+<p>📍 Hingalganj, North 24 Parganas</p>
+<p>🎂 28-07-2004</p>
+<p>🌍 Indian</p>
+<p>🗣 Bengali, Hindi, English</p>
+</div>
+
+<div class="card">
+<h2>Skills</h2>
+HTML<div class="progress"><div class="bar" style="width:90%"></div></div>
+CSS<div class="progress"><div class="bar" style="width:85%"></div></div>
+JavaScript<div class="progress"><div class="bar" style="width:70%"></div></div>
+Python<div class="progress"><div class="bar" style="width:65%"></div></div>
+</div>
+
+<div class="card">
+<h2>Timeline</h2>
+<p>📘 2020 - Secondary</p>
+<p>🎓 2022 - Higher Secondary</p>
+<p>🎓 2025 - B.A Graduation</p>
+<p>💻 2026 - Learning Web Development</p>
+</div>
+
+<div class="card">
+<h2>Achievements</h2>
+<p>🏆 3+ Projects Completed</p>
+<p>💡 5+ Skills Learned</p>
+<p>❤️ 100% Passion for Technology</p>
+</div>
+
+<div class="card">
+<h2>Projects</h2>
+<p>📱 Smart Attendance System</p>
+<p>📷 QR Attendance Project</p>
+<p>🌐 Personal Portfolio Website</p>
+</div>
+
+<div class="card social">
+<h2>Connect & More About Me</h2>
+<p>💻 GitHub : Coming Soon</p>
+<p>🌐 LinkedIn : Coming Soon</p>
+<p>📸 Instagram : Coming Soon</p>
+<p>📘 Facebook : Coming Soon</p>
+<p>🎵 Favorite Hobby : Music</p>
+<p>❤️ Favorite Color : Red</p>
+<p>💻 Dream : Become a Successful Web Developer</p>
+</div>
+
+<div class="card">
+<h2>Live Clock</h2>
+<p id="clock"></p>
+</div>
+
+<div class="card">
+<h2>Visitor Message</h2>
+<p>Thanks for visiting my portfolio ❤️</p>
+</div>
+
+
+<div class="card"><h2>Download CV</h2><button>Download CV</button></div>
+<div class="card"><h2>Project Cards With Images</h2><div class="project-grid">
+<div class="project-card"><img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=600"><p>Smart Attendance System</p></div>
+<div class="project-card"><img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?w=600"><p>QR Attendance</p></div>
+<div class="project-card"><img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=600"><p>Portfolio Website</p></div>
+</div></div>
+<div class="card"><h2>Animated Counters</h2><div class="counter" id="counter">0</div></div>
+<div class="card"><h2>Coding Stats Station</h2><p>HTML: 90% | CSS: 85% | JS: 70% | Python: 65%</p></div>
+<div class="card"><h2>Badges & Certifications</h2><p>🏅 Web Development Learner</p></div>
+<div class="card"><h2>Current Status</h2><p>📚 Currently learning Full Stack Development.</p></div>
+<div class="card"><h2>Favorite Things</h2>
+    <p>🎵 Music </p>
+    <p>❤️🤍 Red and White 
+    <p>💻 Coding</p> 
+    <p>📷 Modeling</p></div>
+<div class="card">
+<h2>📬 Contact Me</h2>
+<form id="contactForm">
+<input type="text" id="name" placeholder="Your Name" required style="width:100%;padding:12px;margin:10px 0;border-radius:12px;">
+<input type="email" id="email" placeholder="Your Email" required style="width:100%;padding:12px;margin:10px 0;border-radius:12px;">
+<textarea id="message" placeholder="Your Message" required style="width:100%;height:120px;padding:12px;margin:10px 0;border-radius:12px;"></textarea>
+<button type="submit">✨ Send Message</button>
+<p id="status"></p>
+</form>
+<p style="margin-top:15px">Feel free to contact me for collaboration, freelance work or opportunities.</p>
+</div>
+<div class="card"><h2>Visitor Counter</h2><p id="visitorCount"></p></div>
+<div class="card"><h2>Quote of the Day</h2><p>"Dream big, start small, keep going."</p></div>
+<div class="card"><h2>Photo Gallery</h2><div class="gallery">
+<div><img src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=600"><p>🌊 Sea View</p></div>
+<div><img src="https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=600"><p>🏔 Mountain View</p></div>
+<div><img src="https://images.unsplash.com/photo-1515694346937-94d85e41e6f0?w=600"><p>🌧 Night Rain</p></div>
+    
+</div></div>
+</div>
+
+<script>
+let texts=[
+"Passionate Learner",
+"Creative Thinker",
+"Aspiring Web Developer",
+"Python Enthusiast"
+];
+let ti=0,ci=0;
+function type(){
+let el=document.getElementById("typing");
+el.innerHTML=texts[ti].slice(0,ci++);
+if(ci>texts[ti].length){
+setTimeout(()=>{ci=0;ti=(ti+1)%texts.length;},800);
+}
+setTimeout(type,120);
+}
+type();
+
+function openPortfolio(){
+document.getElementById("home").style.display="none";
+document.getElementById("portfolio").style.display="block";
+window.scrollTo({top:0,behavior:"smooth"});
+}
+
+setInterval(()=>{
+document.getElementById("clock").innerHTML=
+new Date().toLocaleTimeString();
+},1000);
+
+setTimeout(()=>{document.getElementById('loader').style.display='none'},1500);
+function toggleMusic(){let a=document.getElementById('bgMusic'); if(a.paused){a.play()}else{a.pause()}}
+let c=0; let i=setInterval(()=>{c++; document.getElementById('counter').innerText=c; if(c>=100) clearInterval(i)},20);
+document.getElementById('visitorCount').innerText=localStorage.visits=(+localStorage.visits||0)+1;
+document.addEventListener('mousemove',e=>{let g=document.getElementById('glow');g.style.left=e.pageX+'px';g.style.top=e.pageY+'px';});
+
+emailjs.init("YOUR_PUBLIC_KEY");
+document.getElementById("contactForm").addEventListener("submit",function(e){
+e.preventDefault();
+emailjs.send("YOUR_SERVICE_ID","YOUR_TEMPLATE_ID",{
+from_name:document.getElementById("name").value,
+reply_to:document.getElementById("email").value,
+message:document.getElementById("message").value
+}).then(()=>{
+document.getElementById("status").innerHTML="✅ Message sent successfully!";
+},()=>{
+document.getElementById("status").innerHTML="❌ Failed to send message.";
+});
+});
+
+</script>
+</body>
+</html>
+
+
